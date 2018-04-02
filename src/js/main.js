@@ -48,6 +48,7 @@ let mainWindow
 let printWindow
 let sketchWindow
 let keyCommandWindow
+let sketchPanePreviewWindow
 
 let loadingStatusWindow
 
@@ -1277,4 +1278,41 @@ ipcMain.on('toggleAudition', (event) => {
 // uploader > main-window
 ipcMain.on('signInSuccess', (event, response) => {
   mainWindow.webContents.send('signInSuccess', response)
+})
+
+ipcMain.on('sketchPanePreview', () => {
+  if (!sketchPanePreviewWindow || !sketchPanePreviewWindow.isDestroyed()) {
+    const { width, height } = electron.screen.getPrimaryDisplay().workAreaSize
+
+    sketchPanePreviewWindow = new BrowserWindow({
+      acceptFirstMouse: true,
+      backgroundColor: '#333333',
+
+      width: Math.min(width, 2480),
+      height: Math.min(height, 1350),
+      minWidth: 1024,
+      minHeight: 640,
+
+      title: 'Test New Sketchpane',
+
+      show: false,
+      resizable: true,
+      webPreferences: {
+        webgl: true,
+        experimentalFeatures: true,
+        experimentalCanvasFeatures: true,
+        devTools: true,
+        plugins: false
+      }
+    })
+    sketchPanePreviewWindow.loadURL(`file://${__dirname}/../sketchpane-preview.html`)
+    sketchPanePreviewWindow.once('ready-to-show', () => {
+      sketchPanePreviewWindow.show()
+    })
+    sketchPanePreviewWindow.on('close', () => {
+      sketchPanePreviewWindow = null
+    })
+  } else {
+    sketchPanePreviewWindow.show()
+  }
 })

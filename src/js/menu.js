@@ -634,7 +634,15 @@ AppMenu.window = () => {
     role: 'window',
     submenu: [
       ...SubMenuFragments.windowing,
-      ...extension
+      ...extension,
+      {
+        type: 'separator'
+      },
+      {
+        label: 'Test New Sketchpane',
+        click: () =>
+          ipcRenderer.send('sketchPanePreview')
+      }
     ]
   }
 }
