@@ -2952,7 +2952,6 @@ let previousScene = ()=> {
 }
 
 let updateSketchPaneBoard = () => {
-  console.log('updateSketchPaneBoard')
   return new Promise((resolve, reject) => {
     // get current board
     let board = boardData.boards[currentBoard]
@@ -3015,8 +3014,8 @@ let updateSketchPaneBoard = () => {
       for (let index of visibleLayerIndexes) {
         let image = layersToDrawByIndex[index]
 
-        let context = storyboarderSketchPane.getLayerCanvas(index).getContext('2d')
-        context.globalAlpha = 1
+        // let context = storyboarderSketchPane.getLayerCanvas(index).getContext('2d')
+        // context.globalAlpha = 1
 
         // do we have an image for this particular layer index?
         if (image) {
@@ -3036,6 +3035,8 @@ let updateSketchPaneBoard = () => {
                              typeof board.layers[LAYER_NAME_BY_INDEX[LAYER_INDEX_REFERENCE]].opacity !== 'undefined'
         ? board.layers[LAYER_NAME_BY_INDEX[LAYER_INDEX_REFERENCE]].opacity
         : exporterCommon.DEFAULT_REFERENCE_LAYER_OPACITY
+      //
+      //
       // TODO
       // layersEditor.setReferenceOpacity(referenceOpacity)
 
