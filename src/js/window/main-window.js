@@ -1987,11 +1987,9 @@ let saveImageFile = async () => {
       shouldSaveThumbnail = true
       clearTimeout(imageFileDirtyTimer)
 
-      let canvas = storyboarderSketchPane.getLayerCanvas(index)
       let imageFilePath = path.join(boardPath, 'images', filename)
-
-      let imageData = canvas
-        .toDataURL('image/png')
+      let imageData = storyboarderSketchPane
+        .exportLayer(index)
         .replace(/^data:image\/\w+;base64,/, '')
 
       try {
@@ -3035,8 +3033,6 @@ let updateSketchPaneBoard = () => {
                              typeof board.layers[LAYER_NAME_BY_INDEX[LAYER_INDEX_REFERENCE]].opacity !== 'undefined'
         ? board.layers[LAYER_NAME_BY_INDEX[LAYER_INDEX_REFERENCE]].opacity
         : exporterCommon.DEFAULT_REFERENCE_LAYER_OPACITY
-      //
-      //
       // TODO
       // layersEditor.setReferenceOpacity(referenceOpacity)
 
