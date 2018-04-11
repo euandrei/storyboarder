@@ -5867,9 +5867,8 @@ ipcRenderer.on('toggleAudition', value => {
 
 const log = opt => ipcRenderer.send('log', opt)
 
-// HACK to support Cmd+R reloading
 if (isDev) {
-  // wait
+  // HACK to support Cmd+R reloading
   setTimeout(() => {
     // … if no boardData present after timeout, we probably just Cmd+R reloaded
     if (!boardData) {
@@ -5888,4 +5887,17 @@ if (isDev) {
       }
     }
   }, 500)
+
+  const Stats = require('stats.js')
+  let stats = new Stats()
+  stats.showPanel(0)
+  document.body.appendChild(stats.dom)
+  stats.dom.style.top = '50px'
+
+  const animate = () => {
+    stats.begin()
+    stats.end()
+    window.requestAnimationFrame(animate)
+  }
+  window.requestAnimationFrame(animate)
 }
