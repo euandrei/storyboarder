@@ -2330,7 +2330,7 @@ const renderThumbnailToNewCanvas = (index, options = { forceReadFromFiles: false
 
   if (!options.forceReadFromFiles && index === currentBoard) {
     // grab from current sketchpane (in memory)
-    let canvas = storyboarderSketchPane.sketchPane.utils.pixelsToCanvas(
+    let canvas = storyboarderSketchPane.sketchPane.constructor.utils.pixelsToCanvas(
       storyboarderSketchPane.sketchPane.extractThumbnailPixels(size[0], size[1]),
       size[0],
       size[1]
@@ -5240,7 +5240,7 @@ const storeUndoStateForImage = (isBefore, layerIndices = null) => {
 
   let layers = layerIndices.map(index => {
     // backup to a canvas
-    const source = storyboarderSketchPane.sketchPane.utils.pixelsToCanvas(
+    const source = storyboarderSketchPane.sketchPane.constructor.utils.pixelsToCanvas(
       storyboarderSketchPane.sketchPane.layers[index].pixels(),
       storyboarderSketchPane.sketchPane.width,
       storyboarderSketchPane.sketchPane.height
