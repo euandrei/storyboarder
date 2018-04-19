@@ -4695,7 +4695,7 @@ let pasteBoards = async () => {
     if (!image.isEmpty()) {
 
       // make a blank canvas placeholder for the main image
-      let { width, height } = storyboarderSketchPane.sketchPane.getCanvasSize()
+      let { width, height } = storyboarderSketchPane.getCanvasSize()
       let size = [width, height]
       let blankCanvas = createSizedContext(size).canvas
 
@@ -4792,7 +4792,7 @@ let pasteBoards = async () => {
 
 const insertBoards = (dest, insertAt, boards, { layerDataByBoardIndex }) => {
   // TODO pass `size` as argument instead of relying on storyboarderSketchPane
-  let { width, height } = storyboarderSketchPane.sketchPane.getCanvasSize()
+  let { width, height } = storyboarderSketchPane.getCanvasSize()
   let size = [width, height]
 
   return new Promise((resolve, reject) => {
